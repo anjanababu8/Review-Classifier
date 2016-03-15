@@ -1,6 +1,6 @@
 import pickle
 
-def step4(training_set):
+def trainingTheModel(training_set):
 	# Make a list of words which belongs to reviews classified as +/-	
 	def makeWordList(sign):		
 		wordList = {}
@@ -57,20 +57,6 @@ def step4(training_set):
 	wordCount = [countWords(posDocWordList),countWords(negDocWordList)] # total words belonging to +/-ve review
 	
 	model = trainNaiveBayes() # TRAIN THE MODEL : UNIGRAM NAIVE BAYES MODEL
-
-	pickle.dump(model, open("naiveBayesUnigramModel.p", "wb" ) ) # SAVE THE MODEL
-
 	return model
 	
-fo_data = open("cleaned_data.txt","r")
-corpus = fo_data.readlines()
-training_set = []
-for review in corpus:
-	training_set.append(review)
-naiveModel = step4(training_set)
-
-fo_model = open("model.txt","w")
-fo_model.write("WORD " + "	P+ " + "	P-" + '\n')
-for word,p in naiveModel.items():	
-	fo_model.write(word + "		" + str(p[0]) + " 	" + str(p[1]) + '\n')
 

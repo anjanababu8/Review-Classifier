@@ -11,5 +11,5 @@
 The code used for evaluation (<i>evaluation.py</i>) is included.<br/>
 <b>Accuracy</b> of the model is <b>82.6666666667%</b>
 
-<i>NOTE: The code used in stage 4 (<b>unigram_model.py</b>) is included as a module in the evaluation.py to reuse the model training code. Reviews in cleaned_data.txt is ordered - + - + - ... to ensure approximately equal number of + and - reviews are held out.</i>
+<i>NOTE: The code used in stage 4 (<b>unigram_model.py</b>) is included as a module in the evaluation.py to reuse the model training code. Reviews in cleaned_data.txt is ordered - + - + - ... to ensure approximately equal number of + and - reviews are held out. (Mode exporting code is given in Stage 4)</i>
 

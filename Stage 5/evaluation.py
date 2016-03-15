@@ -19,7 +19,7 @@ def evaluation():
 		test_set = corpus[i*60:(i+1)*60]
 		training_set = list(set(corpus) - set(test_set))
 		
-		modelProbabilities = unigram_model.step4(training_set)
+		modelProbabilities = unigram_model.trainingTheModel(training_set)
 
 		correct = 0
 		countOfReviews  = [countReviews(training_set, '+'), countReviews(training_set, '-')] 
