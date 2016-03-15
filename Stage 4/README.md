@@ -7,4 +7,4 @@
 </ul>
 The exported model file (<i>naiveBayesUnigramModel.p</i>), a human readable version of the model probabilities (<i>model.txt</i>) and the code used for training the model (<i>unigram_model.py</i>) are also included.</i>
 
-<i>Note: the function 'trainingTheModel' ensures the reusability of the code for any training corpus</i>
+<i>NOTE: the function 'trainingTheModel' ensures the reusability of the code for any training corpus.</i>
