@@ -5,4 +5,4 @@
 Collect 500+ reviews from commercial websites like amazon.in, flipcart.com, snapdeal.com etc. and train a model to predict 
 a review as belonging to a +ve or -ve class.
 
-<b>Accuracy of the model is 80%<b>
+<b>Accuracy of the model is 82.6666666667%<b>
