@@ -17,7 +17,13 @@ def evaluation():
 		fo_data = open("cleaned_data.txt",'r')
 		corpus = fo_data.readlines()		
 		test_set = corpus[i*60:(i+1)*60]
-		training_set = list(set(corpus) - set(test_set))
+		
+		j = 0
+		training_set = []
+		for r in corpus:
+			if j not in range(i*60,(i+1)*60):
+				training_set.append(r)
+			j = j + 1
 		
 		modelProbabilities = unigram_model.trainingTheModel(training_set)
 
