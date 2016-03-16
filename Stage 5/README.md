@@ -11,16 +11,16 @@
 The code used for evaluation (<b><i>evaluation.py</i></b>) is included.<br/>
 Average <b>Accuracy</b> of the model is <b>82.6666666667%</b><br/>
 <p>Accuracies of the model in each iteration:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	1<sup>st</sup> : 0.7833333333333333<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	2<sup>nd</sup> : 0.7333333333333333<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	3<sup>rd</sup> : 0.7166666666666667<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	4<sup>th</sup> : 0.85<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	5<sup>th</sup> : 0.7833333333333333<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	6<sup>th</sup> : 0.85<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	7<sup>th</sup> : 0.8666666666666667<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	8<sup>th</sup> : 0.85<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	9<sup>th</sup> : 0.9333333333333333<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	10<sup>th</sup> : 0.9
+&nbsp;&nbsp;&nbsp;&nbsp;	1<sup>st</sup> : 78.33333333333333%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	2<sup>nd</sup> : 73.33333333333333%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	3<sup>rd</sup> : 71.66666666666667%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	4<sup>th</sup> : 85%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	5<sup>th</sup> : 78.33333333333333%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	6<sup>th</sup> : 85%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	7<sup>th</sup> : 86.66666666666667%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	8<sup>th</sup> : 85%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	9<sup>th</sup> : 93.33333333333333%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	10<sup>th</sup> : 90%
 </p>
 
  
