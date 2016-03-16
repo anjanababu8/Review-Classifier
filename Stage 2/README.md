@@ -5,5 +5,5 @@
 <li>Converted the whole text to lower case.</li>
 <li>Dropped characters other than alphabets.</li> 
 </ul>
-Preprocessed data file (<i>cleaned_data.txt</i>) as well as the code (<i>stopwords_removal.py</i>) used for preprocessing are included.
+Preprocessed data file (<b><i>cleaned_data.txt</i></b>) as well as the code (<b><i>stopwords_removal.py</i></b>) used for preprocessing are included.
 
