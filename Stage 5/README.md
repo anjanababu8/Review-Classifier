@@ -9,11 +9,11 @@
 <li>Calculated the average accuracy.</li>
 </ul>
 The code used for evaluation (<b><i>evaluation.py</i></b>) is included.<br/>
-Average <b>Accuracy</b> of the model is <b>82.6666666667%</b><br/>
+Average <b>Accuracy</b> of the model is <b>82.3333333333%</b><br/>
 <p>Accuracies of the model in each iteration:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;	1<sup>st</sup> : 78.33333333333333%<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;	2<sup>nd</sup> : 73.33333333333333%<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	3<sup>rd</sup> : 71.66666666666667%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	3<sup>rd</sup> : 68.33333333333333%<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;	4<sup>th</sup> : 85%<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;	5<sup>th</sup> : 78.33333333333333%<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;	6<sup>th</sup> : 85%<br/>
