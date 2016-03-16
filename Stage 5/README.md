@@ -8,8 +8,21 @@
 <li>Repeated the process 10 times.</li>
 <li>Calculated the average accuracy.</li>
 </ul>
-The code used for evaluation (<i>evaluation.py</i>) is included.<br/>
-<b>Accuracy</b> of the model is <b>82.6666666667%</b>
+The code used for evaluation (<b><i>evaluation.py</i></b>) is included.<br/>
+Average <b>Accuracy</b> of the model is <b>82.6666666667%</b><br/>
+<p>Accuracies of the model in each iteration:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	1<sup>st</sup> : 0.7833333333333333<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	2<sup>nd</sup> : 0.7333333333333333<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	3<sup>rd</sup> : 0.7166666666666667<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	4<sup>th</sup> : 0.85<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	5<sup>th</sup> : 0.7833333333333333<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	6<sup>th</sup> : 0.85<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	7<sup>th</sup> : 0.8666666666666667<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	8<sup>th</sup> : 0.85<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	9<sup>th</sup> : 0.9333333333333333<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	10<sup>th</sup> : 0.9
+</p>
 
-<i>NOTE: The code used in stage 4 (<b>unigram_model.py</b>) is included as a module in the evaluation.py to reuse the model training code. Reviews in cleaned_data.txt is ordered - + - + - ... to ensure approximately equal number of + and - reviews are held out. (Model exporting code is given in Stage 4)</i>
+ 
+<i>NOTE: The code used in stage 4 (unigram_model.py) is included as a module in the evaluation.py to reuse the model training code. Reviews in cleaned_data.txt is ordered - + - + - ... to ensure approximately equal number of + and - reviews are held out. (Model exporting code is given in Stage 4)</i>
 
