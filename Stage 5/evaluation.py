@@ -35,7 +35,6 @@ def evaluation():
 			if((probability[0]>=probability[1] and words[0] == '+') or (probability[1]>=probability[0] and words[0] == '-')):
 				correct = correct + 1
 		accuracy.append(correct*1.0/len(test_set))
-		print accuracy
 	print "Accuracy of the model is " + str((sum(accuracy)/10)*100) + "%"	
 
 evaluation()
