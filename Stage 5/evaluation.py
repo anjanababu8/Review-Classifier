@@ -14,6 +14,7 @@ def countReviews(corpus,sign):
 def evaluation():
 	accuracy = []
 	for i in range(10): # 10 fold evaluation
+		
 		fo_data = open("cleaned_data.txt",'r')
 		corpus = fo_data.readlines()		
 		test_set = corpus[i*60:(i+1)*60]
@@ -41,7 +42,6 @@ def evaluation():
 			if((probability[0]>=probability[1] and words[0] == '+') or (probability[1]>=probability[0] and words[0] == '-')):
 				correct = correct + 1
 		accuracy.append(correct*1.0/len(test_set))
-		print accuracy
 	print "Accuracy of the model is " + str((sum(accuracy)/10)*100) + "%"	
 
 evaluation()

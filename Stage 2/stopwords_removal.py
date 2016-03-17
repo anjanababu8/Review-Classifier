@@ -16,14 +16,16 @@ def STOPWORD(word):
 		
 	return False
 	
-	
-
+# Text preprocessing - tokenise, normalise and stopword removal
 for line in fo_data:
-	words = line.split()
+	
+	words =  re.sub('[,.!]',' ', line).split() # tokenise 
+
 	fo_cleaned.write(words[0] + " ")
-        for word in words[1:]:
-	   cropped_word = re.sub('[^A-Za-z]', ' ', word)
-	   lower_word = cropped_word.lower().replace(" ", "")
-	   if(lower_word and not STOPWORD(lower_word)):
-		fo_cleaned.write(lower_word + " ")
+        
+	for word in words[1:]:
+	   word = re.sub('[^A-Za-z]', '', word)
+	   word = word.lower() # normalise (converted to lower case)
+	   if(word and not STOPWORD(word) and len(word)>1):
+		fo_cleaned.write(word + " ")
 	fo_cleaned.write("\n")
