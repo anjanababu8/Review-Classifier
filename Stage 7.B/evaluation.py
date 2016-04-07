@@ -38,8 +38,12 @@ def evaluation():
 			words = review.split()	
 		        for i in range(1,len(words)-1):
 		           word = words[i] + ' ' + words[i+1]
-			   probability[0] = probability[0] + math.log(modelProbabilities[word][0])
-			   probability[1] = probability[1] + math.log(modelProbabilities[word][1]) 
+			   if word in modelProbabilities:
+			   	probability[0] = probability[0] + math.log(modelProbabilities[word][0])
+			   	probability[1] = probability[1] + math.log(modelProbabilities[word][1]) 
+			   else:
+				probability[0] = probability[0] + math.log(1.0/(uni_bi_model.wordCount[0] + uni_bi_model.vocabularyCount))
+			   	probability[1] = probability[1] + math.log(1.0/(uni_bi_model.wordCount[1] + uni_bi_model.vocabularyCount)) 
 			if((probability[0]>=probability[1] and words[0] == '+') or (probability[1]>=probability[0] and words[0] == '-')):
 				correct = correct + 1
 		accuracy.append(correct*1.0/len(test_set))

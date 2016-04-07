@@ -75,8 +75,10 @@ def trainingTheModel(training_set):
 
 
 	fo_vocabulary = open("adv_vocabulary.txt","r") # number of words in vocabulary
+	global vocabularyCount
 	vocabularyCount = countLines(fo_vocabulary)
 
+	global wordCount
 	wordCount = [countWords(posDocWordList),countWords(negDocWordList)] # total words belonging to +/-ve review
 
 	model = trainNaiveBayes() # TRAIN THE MODEL : UNIGRAM NAIVE BAYES MODEL
