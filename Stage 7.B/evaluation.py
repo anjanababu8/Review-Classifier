@@ -1,6 +1,6 @@
 import pickle
 import math
-import unigram_model  # Module made in Step 4 included to make the model
+import uni_bi_model  # Module made in Step 4 included to make the model
 
 # Counts the number of +/- ve reviews in the corpus 	
 def countReviews(corpus,sign):
@@ -26,7 +26,7 @@ def evaluation():
 				training_set.append(r)
 			j = j + 1
 		
-		modelProbabilities = unigram_model.trainingTheModel(training_set)
+		modelProbabilities = uni_bi_model.trainingTheModel(training_set)
 
 		correct = 0
 		countOfReviews  = [countReviews(training_set, '+'), countReviews(training_set, '-')] 
