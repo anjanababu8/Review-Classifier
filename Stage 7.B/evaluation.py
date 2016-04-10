@@ -34,22 +34,29 @@ def evaluation():
 			posProb = math.log(1.0*countOfReviews[0]/len(training_set))
 			negProb = math.log(1.0*countOfReviews[1]/len(training_set))
 			probability = [posProb, negProb]  
-
-			words = review.split()	
-		        for i in range(1,len(words)-1):
-		           word = words[i] + ' ' + words[i+1]
-			   if word in modelProbabilities:
-			   	probability[0] = probability[0] + math.log(modelProbabilities[word][0])
-			   	probability[1] = probability[1] + math.log(modelProbabilities[word][1]) 
-			   else: # Bigram not in vocabulary as its count<2
-				probability[0] = probability[0] + math.log(modelProbabilities[words[i]][0])
-			   	probability[1] = probability[1] + math.log(modelProbabilities[words[i]][1])
-				if(i == len(words)-2): # i.e its the last bigram...so we have to consider the second word also
-					probability[0] = probability[0] + math.log(modelProbabilities[words[i+1]][0])
-			   		probability[1] = probability[1] + math.log(modelProbabilities[words[i+1]][1])
 				
-
-			if((probability[0]>=probability[1] and words[0] == '+') or (probability[1]>=probability[0] and words[0] == '-')):
+			words = review.split()
+			if(len(words)<2):
+				continue		
+		        for i in range(0,len(words)-1):
+		           word = words[i] + ' ' + words[i+1]
+			   if i == 0: #P(START word | ---)
+			     probability[0] = probability[0] + math.log(modelProbabilities['START '+ words[1]][0])
+			     probability[1] = probability[1] + math.log(modelProbabilities['START '+ words[1]][1]) 	
+			   elif word in modelProbabilities:
+			     probability[0] = probability[0] + math.log(modelProbabilities[word][0])
+			     probability[1] = probability[1] + math.log(modelProbabilities[word][1]) 
+			   else: # Bigram not in vocabulary as its count<2 then consider its unigram probability
+			     probability[0] = probability[0] + math.log(modelProbabilities[words[i]][0])
+			     probability[0] = probability[0] + math.log(modelProbabilities[words[i+1]][0])
+			     probability[1] = probability[1] + math.log(modelProbabilities[words[i]][1])
+			     probability[1] = probability[1] + math.log(modelProbabilities[words[i+1]][1])
+			# P(word STOP ...)
+			probability[0] = probability[0] + math.log(modelProbabilities[words[len(words)-1]+' STOP'][0])
+			probability[1] = probability[1] + math.log(modelProbabilities[words[len(words)-1]+' STOP'][1]) 	
+			
+			if((probability[0]>=probability[1] and words[0] == '+') or 
+			   (probability[1]>=probability[0] and words[0] == '-')):
 				correct = correct + 1
 		accuracy.append(correct*1.0/len(test_set))
 		print accuracy

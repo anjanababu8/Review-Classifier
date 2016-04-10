@@ -18,10 +18,10 @@ for line in fo_cleaned:
 		dict_bi.setdefault(bigram,0)
 		dict_bi[bigram] = dict_bi[bigram] + 1
 
-for word, count in dict_uni.items():	
-	if(count >= 1): 	# we have taken every words since we think that would benefit our model
+for word in sorted(dict_uni):	
+	if(dict_uni[word] >= 1): 	# we have taken every words since we think that would benefit our model
 		fo_vocabulary.write(word + "\n")
 
-for word, count in dict_bi.items():	
-	if(count >= 2): 	
+for word in sorted(dict_bi):	
+	if(dict_bi[word] >= 2): 	
 		fo_vocabulary.write(word + "\n")
