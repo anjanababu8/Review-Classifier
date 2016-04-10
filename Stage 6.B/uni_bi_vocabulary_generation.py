@@ -23,5 +23,5 @@ for word, count in dict_uni.items():
 		fo_vocabulary.write(word + "\n")
 
 for word, count in dict_bi.items():	
-	if(count >= 1): 	# we have taken every words since we think that would benefit our model
+	if(count >= 2): 	
 		fo_vocabulary.write(word + "\n")

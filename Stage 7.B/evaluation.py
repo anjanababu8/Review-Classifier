@@ -41,9 +41,14 @@ def evaluation():
 			   if word in modelProbabilities:
 			   	probability[0] = probability[0] + math.log(modelProbabilities[word][0])
 			   	probability[1] = probability[1] + math.log(modelProbabilities[word][1]) 
-			   else:
-				probability[0] = probability[0] + math.log(1.0/(uni_bi_model.wordCount[0] + uni_bi_model.vocabularyCount))
-			   	probability[1] = probability[1] + math.log(1.0/(uni_bi_model.wordCount[1] + uni_bi_model.vocabularyCount)) 
+			   else: # Bigram not in vocabulary as its count<2
+				probability[0] = probability[0] + math.log(modelProbabilities[words[i]][0])
+			   	probability[1] = probability[1] + math.log(modelProbabilities[words[i]][1])
+				if(i == len(words)-2): # i.e its the last bigram...so we have to consider the second word also
+					probability[0] = probability[0] + math.log(modelProbabilities[words[i+1]][0])
+			   		probability[1] = probability[1] + math.log(modelProbabilities[words[i+1]][1])
+				
+
 			if((probability[0]>=probability[1] and words[0] == '+') or (probability[1]>=probability[0] and words[0] == '-')):
 				correct = correct + 1
 		accuracy.append(correct*1.0/len(test_set))
