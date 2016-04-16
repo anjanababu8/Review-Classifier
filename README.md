@@ -5,8 +5,8 @@
 Collect 500+ reviews from commercial websites like amazon.in, flipcart.com, snapdeal.com etc. and train a model to predict 
 a review as belonging to a +ve or -ve class.
 
-Accuracy of the model using <b>Unigram features only</b> is <b>82.6666666667%</b><br>
-Accuracy of the model using <b>Unigram-Bigram features</b> is <b>83.5%</b><br/>
+Average Accuracy of the model using <b>Unigram features only</b> is <b>82.6666666667%</b><br>
+Average Accuracy of the model using <b>Unigram-Bigram features</b> is <b>83.8333333333%</b><br/>
+Average Accuracy of the model using <b>Bigram features only</b> is <b>94%</b><br/>
 
-Project completed on April 11<sup>th</sup>, 2016
 

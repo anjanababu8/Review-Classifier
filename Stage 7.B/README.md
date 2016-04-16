@@ -9,18 +9,37 @@
 <li>Calculated the average accuracy.</li>
 </ul>
 The code used for evaluation (<b><i>evaluation.py</i></b>) is included.<br/>
-Average <b>Accuracy</b> of the model is <b>83.5%</b><br/>
+<i>NOTE: The code used for creating the model (uni_bi_model.py) is included as a module in the evaluation.py to reuse the model training code. Reviews in cleaned_data.txt is ordered - + - + - ... to ensure equal number of + and - reviews are held out. </i><br/>
+
+<b>How Bag Of Words counts were calculated?</b><br/>
+If a bigram in the training set is present in the vocabulary then the corresponding unigram count is reduced by the bigram count. In doing so, a unigram which became part of two bigram(eg. "not" in "book not good") gets its count decremented twice and results in a negative count. This case is dealt by making those unigram counts whose count became negative to 0.
+
+<b>(UB)</b> The Unigram-Bigram Naive Bayes model was evaluated considering both the bigram features and the unigram features. That is, if a bigram in the review is not present in the vocabulary(as its count &lt; 2) then we considered the corresponding unigram probabilities.<br><br/>
+Average <b>Accuracy</b> of the Unigram-Bigram model is <b>83.8333333333%</b><br/>
 <p>Accuracies of the model in each iteration:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;	1<sup>st</sup> : 81.66666666666667%<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;	2<sup>nd</sup> : 78.33333333333333%<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	3<sup>rd</sup> : 71.66666666666667%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	3<sup>rd</sup> : 81.66666666666667%<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;	4<sup>th</sup> : 85%<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	5<sup>th</sup> : 88.33333333333333%<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	6<sup>th</sup> : 73.33333333333333%<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	7<sup>th</sup> : 91.66666666666666%<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	8<sup>th</sup> : 86.66666666666667%<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	9<sup>th</sup> : 88.33333333333333%<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	10<sup>th</sup> : 90%
- 
-<i>NOTE: The code used for creating the model (uni_bi_model.py) is included as a module in the evaluation.py to reuse the model training code. Reviews in cleaned_data.txt is ordered - + - + - ... to ensure equal number of + and - reviews are held out. </i>
+&nbsp;&nbsp;&nbsp;&nbsp;	5<sup>th</sup> : 81.66666666666667%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	6<sup>th</sup> : 76.66666666666667%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	7<sup>th</sup> : 88.33333333333333%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	8<sup>th</sup> : 85%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	9<sup>th</sup> : 95%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	10<sup>th</sup> : 85%
+
+<hr>
+<b>(B)</b> We have also evaluated the model by considering only bigram features. That is, if a bigram in the review is not present in the vocabulary(as its count &lt; 2) then we didn't consider the corresponding unigram probabilities.<br/><br/> 
+Average <b>Accuracy</b> of the Bigram model is <b>94%</b><br/>
+<p>Accuracies of the model in each iteration:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	1<sup>st</sup> : 98.33333333333333%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	2<sup>nd</sup> : 91.66666666666666%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	3<sup>rd</sup> : 95%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	4<sup>th</sup> : 96.66666666666667%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	5<sup>th</sup> : 95%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	6<sup>th</sup> : 96.66666666666667%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	7<sup>th</sup> : 95%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	8<sup>th</sup> : 90%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	9<sup>th</sup> : 95%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	10<sup>th</sup> : 86.66666666666667%
 

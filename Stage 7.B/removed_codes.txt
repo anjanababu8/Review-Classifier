@@ -1,0 +1,43 @@
+from model.py
+# Including START word and word STOP
+				'''cb = ce = ncb = nce = 0
+				for line in training_set:
+					w = line.split()
+					if(w[0] == '+' and len(w)>1):
+						if(w[1] == word):
+							cb = cb + 1
+						if(w[len(w)-1] == word):
+							ce = ce + 1	
+					elif(w[0] == '-' and len(w)>1):
+						if(w[1] == word):
+							ncb = ncb + 1
+						if(w[len(w)-1] == word):
+							nce = nce + 1	
+
+				#modelProbabilies.setdefault('START ' + word,[0,0])
+				#modelProbabilies.setdefault(word +' STOP',[0,0])   	
+   	
+				#modelProbabilies['START ' + word][0] = (cb+1)*1.0 / (wordCount[0] + vocabularyCount)
+				#modelProbabilies['START ' + word][1] = (ncb+1)*1.0 / (wordCount[1] + vocabularyCount)
+
+				#modelProbabilies[word + ' STOP'][0] = (ce+1)*1.0 / (wordCount[0] + vocabularyCount)
+				#modelProbabilies[word + ' STOP'][1] = (nce+1)*1.0/ (wordCount[1] + vocabularyCount)'''		
+
+''''
+ '''else: # Bigram not in vocabulary as its count<2 then consider its unigram probability
+			     probability[0] = probability[0] + math.log(modelProbabilities[words[i]][0])
+			     probability[1] = probability[1] + math.log(modelProbabilities[words[i]][1])
+			     if i == len(words)-2: # Take the last word also
+				probability[0] = probability[0] + math.log(modelProbabilities[words[i+1]][0])
+			     	probability[1] = probability[1] + math.log(modelProbabilities[words[i+1]][1])
+			'''	
+
+			'''# P(word STOP ...)
+			probability[0] = probability[0] + math.log(modelProbabilities[words[len(words)-1]+' STOP'][0])
+			probability[1] = probability[1] + math.log(modelProbabilities[words[len(words)-1]+' STOP'][1])''' ''''
+
+			   '''if i == 0: #P(START word | ---)
+			     probability[0] = probability[0] + math.log(modelProbabilities['START '+ words[1]][0])
+			     probability[1] = probability[1] + math.log(modelProbabilities['START '+ words[1]][1]) '''				
+
+

@@ -1,7 +1,15 @@
 import pickle
-
 def trainingTheModel(training_set):
-	# Bag Of Words	
+
+	# Returns an array of bigrams present in the vocabulary
+	def getBigrams(fo):
+		bigrams = []
+		for word in fo:
+			if len(word.split())==2:
+				bigrams.append(word[:len(word)-1]) # to remove \n
+		return bigrams
+					
+	# Get the Bag Of Words for + and -	
 	def makeWordList(sign):		
 		wordList = {}
 		bwordList = {}
@@ -15,9 +23,23 @@ def trainingTheModel(training_set):
 			if(words and words[0] == sign):
 			    for i in range(1,len(words)-1):
 			      bigram = words[i] + ' ' + words[i+1]
-			      wordList.setdefault(bigram,0)
-			      wordList[bigram] = wordList[bigram] + 1
-		return wordList
+			      bwordList.setdefault(bigram,0)
+			      bwordList[bigram] = bwordList[bigram] + 1
+		return decCount(wordList, bwordList)		
+		
+	# Decrements the unigram count for which a bigram is present in the vocabulary
+	def decCount(wordList, bwordList):
+		for bi, bi_c in bwordList.items():
+			if bi in bigramsInVocabulary:
+				unigrams = bi.split()				
+				wordList[unigrams[0]] = wordList[unigrams[0]] - bi_c
+				wordList[unigrams[1]] = wordList[unigrams[1]] - bi_c	
+		for uni, uni_c in wordList.items():
+			if uni_c <0:
+				wordList[uni] = 0
+		return dict(wordList.items() + bwordList.items())	
+		
+
 
 	# counts the number of lines in a file
 	def countLines(file_ob):
@@ -33,82 +55,64 @@ def trainingTheModel(training_set):
 			count = count + wcount
 		return count
 
-	# Train a unigram naive bayes model
+	# Train a unigram-bigram naive bayes model
 	def trainNaiveBayes():	
 		fo_vocabulary = open("adv_vocabulary.txt","r")
 		for line in fo_vocabulary:
 			words = line.split()
 			if(len(words) == 1):
 				word = words[0]
-				modelProbabilies.setdefault(word,[0,0])   	
+				modelProb.setdefault(word,[0,0])   	
 				
 				# Unigram Probabilities
-				if (word in posDocWordList):
-				 modelProbabilies[word][0] = (posDocWordList[word]+1)*1.0 / (wordCount[0] + vocabularyCount)
+				if (word in BoW['+']):
+					modelProb[word][0] = (BoW['+'][word]+1)*1.0 / (wordCount['+'] + vocabularyCount)
 				else:
-				 modelProbabilies[word][0] = 1.0 / (wordCount[0] + vocabularyCount)
-				if (word in negDocWordList):	
-				 modelProbabilies[word][1] = (negDocWordList[word]+1)*1.0 / (wordCount[1] + vocabularyCount) 
+					modelProb[word][0] = 1.0 / (wordCount['+'] + vocabularyCount)
+				if (word in BoW['-']):	
+					modelProb[word][1] = (BoW['-'][word]+1)*1.0 / (wordCount['-'] + vocabularyCount) 
 				else:
-				 modelProbabilies[word][1] = 1.0 / (wordCount[1] + vocabularyCount)
+					modelProb[word][1] = 1.0 / (wordCount['-'] + vocabularyCount)
 				
-				# Including START word and word STOP
-				cb = ce = ncb = nce = 0
-				for line in training_set:
-					w = line.split()
-					if(w[0] == '+' and len(w)>1):
-						if(w[1] == word):
-							cb = cb + 1
-						if(w[len(w)-1] == word):
-							ce = ce + 1	
-					elif(w[0] == '-' and len(w)>1):
-						if(w[1] == word):
-							ncb = ncb + 1
-						if(w[len(w)-1] == word):
-							nce = nce + 1	
-
-				modelProbabilies.setdefault('START ' + word,[0,0])
-				modelProbabilies.setdefault(word +' STOP',[0,0])   	
-   	
-				modelProbabilies['START ' + word][0] = (cb+1)*1.0 / (wordCount[0] + vocabularyCount)
-				modelProbabilies['START ' + word][1] = (ncb+1)*1.0 / (wordCount[1] + vocabularyCount)
-
-				modelProbabilies[word + ' STOP'][0] = (ce+1)*1.0 / (wordCount[0] + vocabularyCount)
-				modelProbabilies[word + ' STOP'][1] = (nce+1)*1.0/ (wordCount[1] + vocabularyCount)		
+				
 
 			if (len(words) == 2):
 				word = words[0] + " " + words[1]
-				modelProbabilies.setdefault(word,[0,0])  
-				if (word in posDocWordList):
-					modelProbabilies[word][0] = (posDocWordList[word]+1)*1.0 / (wordCount[0] + vocabularyCount)
+				modelProb.setdefault(word,[0,0])  
+				if (word in BoW['+']):
+					modelProb[word][0] = (BoW['+'][word]+1)*1.0 / (wordCount['+'] + vocabularyCount)
 				else:
-					modelProbabilies[word][0] = 1.0 / (wordCount[0] + vocabularyCount)
+					modelProb[word][0] = 1.0 / (wordCount['+'] + vocabularyCount)
 
-				if (word in negDocWordList):	
-					modelProbabilies[word][1] = (negDocWordList[word]+1)*1.0 / (wordCount[1] + vocabularyCount) 
+				if (word in BoW['-']):	
+					modelProb[word][1] = (BoW['-'][word]+1)*1.0 / (wordCount['-'] + vocabularyCount) 
 				else:
-					modelProbabilies[word][1] = 1.0 / (wordCount[1] + vocabularyCount)
+					modelProb[word][1] = 1.0 / (wordCount['-'] + vocabularyCount)
 	
-
-
-		return modelProbabilies
+		return modelProb
 
 
 	## DATA STRUCTURES and how it is populated
-	modelProbabilies = {}	# {Vocabulary_Word : [Probability in +, Probability in - review]} i.e w->[p+,p-]
+	modelProb = {}	# {Vocabulary_Word : [Probability in +, Probability in - review]} i.e w->[p+,p-]
+
+	fo_vocabulary = open("adv_vocabulary.txt","r")
+	bigramsInVocabulary = getBigrams(fo_vocabulary)	
 	
-	posDocWordList = makeWordList('+') # word:count in +ve Reviews  
-	negDocWordList = makeWordList('-') # word:count in -ve Reviews
+	BoW = {'+': makeWordList('+'), '-': makeWordList('-')} # {'+' : {word:count....} }
 
 	fo_vocabulary = open("adv_vocabulary.txt","r") # number of words in vocabulary
-	global vocabularyCount
-	vocabularyCount = countLines(fo_vocabulary) + 2
+	vocabularyCount = countLines(fo_vocabulary)
 
-	global wordCount
-	wordCount = [countWords(posDocWordList),countWords(negDocWordList)] # total words belonging to +/-ve review
+	wordCount = {'+':countWords(BoW['+']), '-':countWords(BoW['-'])} # total occurences of words belonging to +/-ve review
 
-	model = trainNaiveBayes() # TRAIN THE MODEL : UNIGRAM NAIVE BAYES MODEL
+	model =  trainNaiveBayes() # TRAIN THE MODEL : UNIGRAM-BIGRAM NAIVE BAYES MODEL
 	
+	pickle.dump(model, open("model.pickle", "wb" ) ) # SAVE THE MODEL
+	# to make a human readable version of the model
+	fo_model = open("model.txt","w")
+	fo_model.write("WORD " + "	P+ " + "	P-" + '\n')
+	for word,p in model.items():	
+		fo_model.write(word + "		" + str(p[0]) + " 	" + str(p[1]) + '\n')
+
 	return model
-	
 

@@ -1,4 +1,3 @@
-import pickle
 import math
 import uni_bi_model  # Module made in Step 4 included to make the model
 
@@ -6,15 +5,14 @@ import uni_bi_model  # Module made in Step 4 included to make the model
 def countReviews(corpus,sign):
 	count = 0
 	for review in corpus:
-		words = review.split()
-		if(words[0] == sign):
+		if(review[0] == sign):
 			count = count + 1
 	return count	
 
 def evaluation():
-	accuracy = []
-	for i in range(10): # 10 fold evaluation
-		
+	accuracy = {'UB' : [], 'B': []}
+
+	for i in range(10): # 10 fold evaluation		
 		fo_data = open("cleaned_data.txt",'r')
 		corpus = fo_data.readlines()		
 		test_set = corpus[i*60:(i+1)*60]
@@ -26,41 +24,63 @@ def evaluation():
 				training_set.append(r)
 			j = j + 1
 		
-		modelProbabilities = uni_bi_model.trainingTheModel(training_set)
+		modelProb = uni_bi_model.trainingTheModel(training_set) # Train the model using the new training_set
 
-		correct = 0
-		countOfReviews  = [countReviews(training_set, '+'), countReviews(training_set, '-')] 
+		correct = {'UB':0,'B':0}
+		countOfReviews  = {'+' : countReviews(training_set, '+'), '-' : countReviews(training_set, '-')} # 30, 30
 		for review in test_set:
-			posProb = math.log(1.0*countOfReviews[0]/len(training_set))
-			negProb = math.log(1.0*countOfReviews[1]/len(training_set))
-			probability = [posProb, negProb]  
+			prior = {'+': math.log(1.0*countOfReviews['+']/len(training_set)),
+				 '-': math.log(1.0*countOfReviews['-']/len(training_set))}
+			
+			# Initialise with the Prior Probabilities : 2 VAR for 2 Model evaluations
+			sentProb = {'UB' : {'+': prior['+'], '-':prior['-']},
+				    'B' :  {'+': prior['+'], '-':prior['-']}}  
 				
 			words = review.split()
 			if(len(words)<2):
 				continue		
-		        for i in range(0,len(words)-1):
-		           word = words[i] + ' ' + words[i+1]
-			   if i == 0: #P(START word | ---)
-			     probability[0] = probability[0] + math.log(modelProbabilities['START '+ words[1]][0])
-			     probability[1] = probability[1] + math.log(modelProbabilities['START '+ words[1]][1]) 	
-			   elif word in modelProbabilities:
-			     probability[0] = probability[0] + math.log(modelProbabilities[word][0])
-			     probability[1] = probability[1] + math.log(modelProbabilities[word][1]) 
+
+
+		        for i in range(1,len(words)-1): # iter from 1 to n-2 [0,1,...... n-2,n-1]
+		           bigram = words[i] + ' ' + words[i+1]
+			   uni_1, uni_2 = words[i], words[i+1] 
+
+			   # EVALUATION : 
+			   # (UB) Considering Both Unigram and Bigram features
+			   # (B) Considering only Bigram features
+			   if bigram in modelProb:
+			     sentProb['UB']['+'] = sentProb['UB']['+'] + math.log(modelProb[bigram][0])
+			     sentProb['UB']['-'] = sentProb['UB']['-'] + math.log(modelProb[bigram][1])
+ 			     sentProb['B']['+'] = sentProb['B']['+'] +  math.log(modelProb[bigram][0])
+ 			     sentProb['B']['-'] = sentProb['B']['-'] +  math.log(modelProb[bigram][1])
+			   
 			   else: # Bigram not in vocabulary as its count<2 then consider its unigram probability
-			     probability[0] = probability[0] + math.log(modelProbabilities[words[i]][0])
-			     probability[0] = probability[0] + math.log(modelProbabilities[words[i+1]][0])
-			     probability[1] = probability[1] + math.log(modelProbabilities[words[i]][1])
-			     probability[1] = probability[1] + math.log(modelProbabilities[words[i+1]][1])
-			# P(word STOP ...)
-			probability[0] = probability[0] + math.log(modelProbabilities[words[len(words)-1]+' STOP'][0])
-			probability[1] = probability[1] + math.log(modelProbabilities[words[len(words)-1]+' STOP'][1]) 	
-			
-			if((probability[0]>=probability[1] and words[0] == '+') or 
-			   (probability[1]>=probability[0] and words[0] == '-')):
-				correct = correct + 1
-		accuracy.append(correct*1.0/len(test_set))
-		print accuracy
-	print "Accuracy of the model is " + str((sum(accuracy)/10)*100) + "%"	
+			     sentProb['UB']['+'] = sentProb['UB']['+'] + math.log(modelProb[uni_1][0])
+			     sentProb['UB']['-'] = sentProb['UB']['-'] + math.log(modelProb[uni_1][1])
+			     if i == len(words)-2: # Take the last word also
+				sentProb['UB']['+'] = sentProb['UB']['+'] + math.log(modelProb[uni_2][0])
+			     	sentProb['UB']['-'] = sentProb['UB']['-'] + math.log(modelProb[uni_2][1])
+
+			# Decision Making
+			if(review[0] == '+'):
+				if sentProb['UB']['+'] >= sentProb['UB']['-']:
+					correct['UB'] = correct['UB'] + 1
+				if sentProb['B']['+'] >= sentProb['B']['-']: 
+					correct['B'] = correct['B'] + 1	
+			else:
+				if sentProb['UB']['-'] >= sentProb['UB']['+']:
+					correct['UB'] = correct['UB'] + 1
+				if sentProb['B']['-'] >= sentProb['B']['+']: 
+					correct['B'] = correct['B'] + 1		
+			 
+		accuracy['UB'].append(correct['UB']*1.0/len(test_set))
+		accuracy['B'].append(correct['B']*1.0/len(test_set))
+
+	print accuracy['UB']
+	print "Average Accuracy of the Unigram-Bigram model is " + str((sum(accuracy['UB'])/10)*100) + "%"	
+
+	print accuracy['B']
+	print "Average Accuracy of the Bigram model is " + str((sum(accuracy['B'])/10)*100) + "%"	
 
 evaluation()
 
