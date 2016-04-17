@@ -29,17 +29,17 @@ Average <b>Accuracy</b> of the Unigram-Bigram model is <b>83.8333333333%</b><br/
 &nbsp;&nbsp;&nbsp;&nbsp;	10<sup>th</sup> : 85%
 
 <hr>
-<b>(B)</b> We have also evaluated the model by considering only bigram features. That is, if a bigram in the review is not present in the vocabulary(as its count &lt; 2) then we didn't consider the corresponding unigram probabilities.<br/><br/> 
-Average <b>Accuracy</b> of the Bigram model is <b>94%</b><br/>
+<b>(B)</b> We have also evaluated the model by considering only bigram features. That is, if a bigram in the review is not present in the vocabulary(as its count &lt; 2) then we didn't consider the corresponding unigram probabilities, instead just did smoothing.<br/><br/> 
+Average <b>Accuracy</b> of the Bigram model is <b>70.5%</b><br/>
 <p>Accuracies of the model in each iteration:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	1<sup>st</sup> : 98.33333333333333%<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	2<sup>nd</sup> : 91.66666666666666%<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	3<sup>rd</sup> : 95%<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	4<sup>th</sup> : 96.66666666666667%<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	5<sup>th</sup> : 95%<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	6<sup>th</sup> : 96.66666666666667%<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	7<sup>th</sup> : 95%<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	8<sup>th</sup> : 90%<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	9<sup>th</sup> : 95%<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;	10<sup>th</sup> : 86.66666666666667%
+&nbsp;&nbsp;&nbsp;&nbsp;	1<sup>st</sup> : 65%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	2<sup>nd</sup> : 63.33333333333333%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	3<sup>rd</sup> : 56.66666666666667%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	4<sup>th</sup> : 73.33333333333333%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	5<sup>th</sup> : 80%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	6<sup>th</sup> : 66.666666666667%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	7<sup>th</sup> : 71.66666666666667%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	8<sup>th</sup> : 68.33333333333333%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	9<sup>th</sup> : 81.66666666666667%<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	10<sup>th</sup> : 78.33333333333333%
 

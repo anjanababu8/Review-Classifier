@@ -101,6 +101,9 @@ def trainingTheModel(training_set):
 	BoW = {'+': makeWordList('+'), '-': makeWordList('-')} # {'+' : {word:count....} }
 
 	fo_vocabulary = open("adv_vocabulary.txt","r") # number of words in vocabulary
+
+	global wordCount
+	global vocabularyCount	
 	vocabularyCount = countLines(fo_vocabulary)
 
 	wordCount = {'+':countWords(BoW['+']), '-':countWords(BoW['-'])} # total occurences of words belonging to +/-ve review

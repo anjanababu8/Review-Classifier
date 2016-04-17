@@ -60,6 +60,9 @@ def evaluation():
 			     if i == len(words)-2: # Take the last word also
 				sentProb['UB']['+'] = sentProb['UB']['+'] + math.log(modelProb[uni_2][0])
 			     	sentProb['UB']['-'] = sentProb['UB']['-'] + math.log(modelProb[uni_2][1])
+				
+			     sentProb['B']['+'] = sentProb['B']['+'] +  math.log(1.0 / (uni_bi_model.wordCount['+'] + uni_bi_model.vocabularyCount))
+ 			     sentProb['B']['-'] = sentProb['B']['-'] +  math.log(1.0 / (uni_bi_model.wordCount['-'] + uni_bi_model.vocabularyCount))
 
 			# Decision Making
 			if(review[0] == '+'):
